@@ -1,14 +1,7 @@
 name: Maven CI/CD Pipeline
 
 on:
-  workflow_dispatch:   # manual trigger
-  # you can also add push / pull_request if needed
-  # push:
-  #   branches:
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - main
+  workflow_dispatch:   # manual trigger only
 
 jobs:
   build-and-test:
@@ -19,7 +12,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Set up Java
+      # Set up Java (adjust version if needed: 8, 11, 17, 21 etc.)
       - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
@@ -35,27 +28,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Install dependencies & build
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
+      # Build, run tests, and generate cucumber reports in one step
+      - name: Build + Test + Generate Reports
+        run: mvn clean verify -e
 
-      # Run tests
-      - name: Run Tests
-        run: mvn test
-
-      # Generate Cucumber HTML Reports
-      - name: Generate Reports
-        run: mvn verify
-
-      # Upload Test Reports as artifacts
+      # Upload Cucumber HTML Reports
       - name: Upload Cucumber Reports
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-html-reports
           path: target/HTML-reports
 
+      # Upload Cucumber JSON file
       - name: Upload Cucumber JSON
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-json
-          path: target/cucumber.json
+          path: target/cucumber-report/cucumber.json
