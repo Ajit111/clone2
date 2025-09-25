@@ -13,24 +13,25 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <cucumber.reporting.version>5.7.5</cucumber.reporting.version>
+        <surefire.version>3.0.0-M9</surefire.version>
     </properties>
 
     <dependencies>
-        <!-- JUnit 4 for Cucumber -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- JUnit 5 (optional support) -->
+        <!-- Testing dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -46,26 +47,24 @@
             <version>7.11.1</version>
         </dependency>
 
-        <!-- Rest Assured -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>4.4.0</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.8.1</version>
         </dependency>
-
-        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.4.1</version>
+        </dependency>
+
+        <!-- API Testing -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.4.0</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Logging -->
@@ -80,39 +79,34 @@
             <version>2.17.2</version>
         </dependency>
 
-        <!-- TestNG (optional) -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.7.1</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Cucumber Reporting -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
-            <version>5.7.5</version>
+            <version>${cucumber.reporting.version}</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Run tests -->
+            <!-- Test runner -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${surefire.version}</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/*Runner*.java</include>
+                    </includes>
                 </configuration>
             </plugin>
 
-            <!-- Generate HTML reports -->
+            <!-- Cucumber HTML Report -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.5</version>
+                <version>${cucumber.reporting.version}</version>
                 <executions>
                     <execution>
                         <id>generate-cucumber-report</id>
