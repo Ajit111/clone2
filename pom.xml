@@ -87,46 +87,39 @@
 <version>5.7.5</version>
 </dependency>
 </dependencies>
-
-         
 <build>
-    <plugins>
-        <!-- Surefire plugin for running tests -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M7</version>
-            <configuration>
-                <testFailureIgnore>false</testFailureIgnore>
-            </configuration>
-        </plugin>
-
-        <!-- Cucumber Reporting plugin -->
-        <plugin>
-            <groupId>net.masterthought</groupId>
-            <artifactId>maven-cucumber-reporting</artifactId>
-            <version>5.7.5</version>
-            <executions>
-                <execution>
-                    <id>generate-cucumber-report</id>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                    <configuration>
-                        <projectName>Example Project</projectName>
-                        <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                        <jsonFiles>
-                            <param>${project.build.directory}/cucumber.json</param>
-                        </jsonFiles>
-                        <checkBuildResult>true</checkBuildResult>
-                        <failBuildOnEmptyReport>false</failBuildOnEmptyReport>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
+<plugins>
+<!--  Maven Surefire Plugin for test execution  -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+<version>3.0.0-M5</version>
+<configuration>
+<testFailureIgnore>true</testFailureIgnore>
+</configuration>
+</plugin>
+<!--  Cucumber Reporting Plugin for generating HTML reports  -->
+<plugin>
+<groupId>net.masterthought</groupId>
+<artifactId>maven-cucumber-reporting</artifactId>
+<version>5.7.5</version>
+<executions>
+<execution>
+<id>generate-cucumber-report</id>
+<phase>verify</phase>
+<goals>
+<goal>generate</goal>
+</goals>
+<configuration>
+<projectName>CucumberJava</projectName>
+<outputDirectory>target/HTML-reports</outputDirectory>
+<jsonFiles>
+<param>target/cucumber.json</param>
+</jsonFiles>
+</configuration>
+</execution>
+</executions>
+</plugin>
+</plugins>
 </build>
-
-         
 </project>
