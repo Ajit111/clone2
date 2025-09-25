@@ -1,18 +1,14 @@
 name: Maven CI with Cucumber Reports
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+  workflow_dispatch:   # सिर्फ manual run के लिए
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Set up JDK 11
@@ -21,12 +17,12 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Build with Maven (run tests + generate reports)
+      - name: Build with Maven (Run Tests + Generate Reports)
         run: mvn clean verify -Dmaven.test.failure.ignore=false
 
-      - name: Archive cucumber reports
+      - name: Upload Cucumber HTML Reports
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-html-report
-          path: target/cucumber-html-reports/
+          path: target/HTML-reports/
