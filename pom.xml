@@ -119,31 +119,28 @@
             </plugin>
             
             <!-- Cucumber Reporting Plugin for generating HTML reports -->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.5</version>
-                <executions>
-                    <execution>
-                        <id>generate-cucumber-report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>CucumberJava</projectName>
-                            <outputDirectory>target/HTML-reports</outputDirectory>
-                            <jsonFiles>
-                              <param>target/cucumber-report/cucumber.json</param>   
-                             <skipOnFailure>true</skipOnFailure>
+           <plugin>
+  <groupId>net.masterthought</groupId>
+  <artifactId>maven-cucumber-reporting</artifactId>
+  <version>5.7.5</version>
+  <executions>
+    <execution>
+      <id>generate-cucumber-report</id>
+      <phase>verify</phase>
+      <goals>
+        <goal>generate</goal>
+      </goals>
+      <configuration>
+        <projectName>CucumberJava</projectName>
+        <outputDirectory>target/HTML-reports</outputDirectory>
+        <jsonFiles>
+          <param>target/cucumber-report/cucumber.json</param>
+        </jsonFiles>
+        <skipOnFailure>true</skipOnFailure> <!-- ✅ important -->
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
 
-                             
-                         
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
 </project>
