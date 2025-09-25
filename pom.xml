@@ -115,7 +115,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>CucumberJava</projectName>
+                            <projectName>CucumberJava2.0</projectName>
                             <outputDirectory>target/HTML-reports</outputDirectory>
                             <jsonFiles>
                                 <param>target/cucumber.json</param>
