@@ -135,7 +135,8 @@
                             <outputDirectory>target/HTML-reports</outputDirectory>
                             <jsonFiles>
                               <param>target/cucumber-report/cucumber.json</param>   
-                             
+                             <skipOnFailure>true</skipOnFailure>
+
                              
                          
                             </jsonFiles>
