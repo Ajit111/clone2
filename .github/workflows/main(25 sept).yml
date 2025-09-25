@@ -1,7 +1,7 @@
 name: Maven CI with Cucumber Reports
 
 on:
-  workflow_dispatch:   # सिर्फ manual run के लिए
+  workflow_dispatch:   # Manual trigger
 
 jobs:
   build:
