@@ -1,0 +1,27 @@
+name: Automation-Cucumber Tests
+
+on:
+  schedule:
+    # Every Tuesday at 6 AM IST (IST = UTC+5:30 → 00:30 UTC)
+    - cron: "30 0 * * 2"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 22
+        uses: actions/setup-java@v4
+        with:
+          java-version: '22'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build project
+        run: mvn clean install -DskipTests
+
+      - name: Run RunnerTest
+        run: mvn -Dtest=Runner.RunnerTest test
