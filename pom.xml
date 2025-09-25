@@ -134,7 +134,10 @@
                             <projectName>CucumberJava</projectName>
                             <outputDirectory>target/HTML-reports</outputDirectory>
                             <jsonFiles>
-                                <param>target/cucumber.json</param>
+                              <param>target/cucumber-report/cucumber.json</param>   
+                             
+                             
+                         
                             </jsonFiles>
                         </configuration>
                     </execution>
