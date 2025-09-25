@@ -22,16 +22,17 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/java/Features",          // Feature files ka path
-    glue = {"StepDefinition"},                    // Step definitions ka package
+    features = "src/test/java/Features",    
+    glue = {"StepDefinition"},               
     plugin = {
         "pretty",
-        "json:target/cucumber.json",              // JSON report (CI/CD me jaruri)
-        "html:target/cucumber-html-report",       // Local HTML report
-        "junit:target/cucumber.xml"               // JUnit XML (Jenkins/GitLab me kaam aata hai)
+        "json:target/cucumber.json",         
+        "html:target/cucumber-html-report",  
+        "junit:target/cucumber.xml"          
     },
     monochrome = true,
-    publish = true                                // Cucumber cloud link (optional)
+    publish = true
 )
 public class RunnerTest {
 }
+
