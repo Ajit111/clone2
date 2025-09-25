@@ -28,9 +28,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Build, run tests, and generate cucumber reports in one step
-      - name: Build + Test + Generate Reports
-        run: mvn clean verify -e
+      # Build + Test + Generate Cucumber Report
+      - name: Build + Test + Report
+        run: mvn clean verify -e -X
+
+      # Debug: Check if cucumber.json exists
+      - name: Debug - List target folder
+        run: ls -R target
 
       # Upload Cucumber HTML Reports
       - name: Upload Cucumber Reports
