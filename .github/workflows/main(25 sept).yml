@@ -40,19 +40,22 @@ jobs:
       - name: Run Cucumber Tests
         run: mvn test
 
-      # 6️⃣ Generate Cucumber HTML Report
+      # 6️⃣ Generate Cucumber Report (fail-safe)
       - name: Generate Cucumber Report
-        run: mvn verify
+        run: mvn verify || echo "Report generation failed, but continuing..."
+        continue-on-error: true
 
-      # 7️⃣ Upload HTML Report as Artifact
-      - name: Upload Cucumber HTML Report
+      # 7️⃣ Upload HTML Report if exists
+      - name: Upload HTML Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-html-report
           path: target/cucumber-html-report
 
-      # 8️⃣ Upload JSON Report as Artifact (optional)
-      - name: Upload Cucumber JSON Report
+      # 8️⃣ Upload JSON Report if exists
+      - name: Upload JSON Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-json-report
