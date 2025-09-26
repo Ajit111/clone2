@@ -27,8 +27,47 @@ jobs:
       - name: Generate Cucumber Report
         run: mvn verify -Dmaven.test.failure.ignore=true
 
-      - name: Upload Test Reports
+      - name: Upload Test Reports (Artifacts)
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-html-report
           path: target/cucumber-reports/
+
+  deploy-report:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Reports from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: cucumber-html-report
+          path: ./report
+
+      - name: Upload Report to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./report
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: deploy-report
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
