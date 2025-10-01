@@ -26,11 +26,12 @@
         </dependency>
 
         <!-- WebDriverManager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.9.2</version>
-        </dependency>
+      <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>4.4.3</version> <!-- Java 8 compatible -->
+</dependency>
+
 
         <!-- Apache Commons IO -->
         <dependency>
